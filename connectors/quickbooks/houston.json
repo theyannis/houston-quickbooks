@@ -5,7 +5,7 @@
   "files": [
     "connector.luau"
   ],
-  "icon": "icon.png",
+  "icon": "icon.svg",
   "config": {
     "access": {
       "default": "read-only",
