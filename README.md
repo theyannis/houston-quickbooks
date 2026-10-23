@@ -14,6 +14,3 @@ In Houston Hub, open **My connectors → Publish**, enter this repository as `ow
 and use `connectors/quickbooks/houston.json` as the manifest path. Hub validates the manifest,
 type-checks the Luau and runs the fixtures before creating a release. Then add a connection
 and follow `SETUP.md`.
-
-The icon is a generic placeholder; you can replace `icon.svg` with Intuit's official
-QuickBooks mark if your use complies with Intuit's brand guidelines.
