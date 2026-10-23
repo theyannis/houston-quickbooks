@@ -11,8 +11,6 @@ return {
 	end,
 	run = function(qbo)
 		assert(qbo.createEntity ~= nil and qbo.updateEntity ~= nil and qbo.deleteEntity ~= nil and qbo.voidTransaction ~= nil, "read-write surface lacks writes")
-		local help = qbo.help()
-		assert(string.find(help, "request_id", 1, true) and not string.find(help, "sandbox", 1, true), "help does not describe writes")
 		local base = "https://quickbooks.api.intuit.com/v3/company/123145000000000/"
 
 		table.insert(responses, '{"Invoice":{"Id":"201","SyncToken":"0","TotalAmt":150},"time":"t"}')

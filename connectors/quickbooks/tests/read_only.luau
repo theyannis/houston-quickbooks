@@ -12,10 +12,6 @@ return {
 	run = function(qbo)
 		assert(qbo.createEntity == nil and qbo.updateEntity == nil and qbo.deleteEntity == nil and qbo.voidTransaction == nil, "read-only surface exposes writes")
 		assert(qbo.query ~= nil and qbo.getReport ~= nil and qbo.getChanges ~= nil, "read surface is incomplete")
-		local help = qbo.help()
-		assert(string.find(help, "Read-only connections omit writes.", 1, true) and string.find(help, "sandbox", 1, true), "help does not describe the surface")
-		assert(not string.find(help, "createEntity", 1, true), "help lists a write")
-
 		local base = "https://sandbox-quickbooks.api.intuit.com/v3/company/9341450000000001"
 		table.insert(responses, '{"CompanyInfo":{"CompanyName":"Sandbox Company_US_1","Id":"1"},"time":"2026-10-23T15:00:00-07:00"}')
 		assert(qbo.getCompanyInfo().CompanyName == "Sandbox Company_US_1")

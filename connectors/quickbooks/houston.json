@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "QuickBooks Online",
+  "verification_key": "594d208fc48161aa6e504e56077299be37812b55abddad19a7c678d4c4b78087",
   "files": [
     "connector.luau"
   ],
