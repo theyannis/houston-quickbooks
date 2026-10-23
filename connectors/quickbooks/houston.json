@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "name": "QuickBooks Online",
+  "files": [
+    "connector.luau"
+  ],
+  "icon": "icon.svg",
+  "config": {
+    "access": {
+      "default": "read-only",
+      "label": "Access",
+      "options": [
+        {
+          "label": "Read-only",
+          "value": "read-only"
+        },
+        {
+          "label": "Read and write",
+          "value": "read-write"
+        }
+      ],
+      "order": 1,
+      "type": "string"
+    },
+    "environment": {
+      "default": "sandbox",
+      "description": "Sandbox works with an Intuit app's Development keys and a sandbox company. Production needs the app's Production keys.",
+      "label": "Environment",
+      "options": [
+        {
+          "label": "Sandbox",
+          "value": "sandbox"
+        },
+        {
+          "label": "Production",
+          "value": "production"
+        }
+      ],
+      "order": 2,
+      "type": "string"
+    },
+    "company_id": {
+      "description": "The numeric Realm ID of the QuickBooks company to connect.",
+      "label": "QuickBooks company ID (Realm ID)",
+      "max_length": 32,
+      "min_length": 1,
+      "order": 3,
+      "placeholder": "9341450000000000",
+      "required": true,
+      "type": "string"
+    },
+    "client_id": {
+      "label": "Intuit app client ID",
+      "order": 4,
+      "required": true,
+      "type": "string"
+    },
+    "client_secret": {
+      "label": "Intuit app client secret",
+      "order": 5,
+      "required": true,
+      "type": "secret"
+    }
+  },
+  "auth": {
+    "intuit": {
+      "type": "oauth2",
+      "label": "Connect with Intuit",
+      "authorize_url": "https://appcenter.intuit.com/connect/oauth2",
+      "token_url": "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
+      "client_id": "{{config.client_id}}",
+      "client_secret": "{{config.client_secret}}",
+      "client_auth": "basic",
+      "pkce": "none",
+      "require_refresh": true,
+      "scopes": [
+        {
+          "values": [
+            "com.intuit.quickbooks.accounting"
+          ]
+        }
+      ]
+    }
+  },
+  "proxy": [
+    {
+      "match": {
+        "protocol": "http",
+        "host": [
+          "quickbooks.api.intuit.com",
+          "sandbox-quickbooks.api.intuit.com"
+        ],
+        "method": [
+          "GET"
+        ],
+        "path": [
+          "/v3/company/{realm_id}/cdc",
+          "/v3/company/{realm_id}/preferences",
+          "/v3/company/{realm_id}/query",
+          "/v3/company/{realm_id}/reports/{report}",
+          "/v3/company/{realm_id}/{entity}/{id}"
+        ]
+      },
+      "action": {
+        "headers": {
+          "remove": [
+            "X-HTTP-Method-Override",
+            "X-HTTP-Method",
+            "X-Method-Override"
+          ],
+          "set": {
+            "Authorization": "Bearer {{auth.intuit.access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "if": "{{ is config.access \"read-write\" }}",
+      "match": {
+        "protocol": "http",
+        "host": [
+          "quickbooks.api.intuit.com",
+          "sandbox-quickbooks.api.intuit.com"
+        ],
+        "method": [
+          "POST"
+        ],
+        "path": [
+          "/v3/company/{realm_id}/{entity}"
+        ]
+      },
+      "action": {
+        "headers": {
+          "remove": [
+            "X-HTTP-Method-Override",
+            "X-HTTP-Method",
+            "X-Method-Override"
+          ],
+          "set": {
+            "Authorization": "Bearer {{auth.intuit.access_token}}"
+          }
+        }
+      }
+    }
+  ]
+}
