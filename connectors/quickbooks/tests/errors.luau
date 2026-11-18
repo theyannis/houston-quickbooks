@@ -1,5 +1,5 @@
 return {
-	scenario = {publisher = {}, config = {access = "read-write", company_id = "9341450000000001", client_id = "fixture-client", client_secret = "fixture-secret"}, auth_method = "intuit", auth_config = {}},
+	scenario = {publisher = {}, access = {data = "write"}, config = {company_id = "9341450000000001", client_id = "fixture-client", client_secret = "fixture-secret"}, auth_method = "intuit", auth_config = {}},
 	configure = function()
 		calls = 0
 		status = 200

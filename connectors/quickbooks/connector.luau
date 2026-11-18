@@ -358,7 +358,8 @@ local exports: {[string]: any} = {
 	getReport = getReport,
 	getChanges = getChanges,
 }
-if config.access == "read-write" then
+local WRITE = houston.allows("data:write")
+if WRITE then
 	exports.createEntity = createEntity
 	exports.updateEntity = updateEntity
 	exports.deleteEntity = deleteEntity
@@ -378,7 +379,7 @@ exports.help = function(): string
 		"Errors report the HTTP status and QuickBooks' fault type, code, message and detail, such as 400 ValidationFault 6000 or 401 AUTHENTICATION 3200 (sign in again). QuickBooks allows about 500 requests per minute per company and 10 at a time.",
 	}
 	for _, name in list do table.insert(lines, about[name]) end
-	table.insert(lines, if config.access == "read-write" then WRITES else "Read-only connections omit writes.")
+	table.insert(lines, if WRITE then WRITES else "Connections with Read access omit writes.")
 	return table.concat(lines, "\n")
 end
 

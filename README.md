@@ -1,7 +1,7 @@
 # QuickBooks Online connector for Houston
 
 A [Houston](https://ok-houston.com) connector bundle for the QuickBooks Online Accounting API,
-written to the [houston-hub](https://github.com/aibakery/houston-hub) manifest v1 contract.
+written to the [houston-hub](https://github.com/aibakery/houston-hub) manifest v2 contract.
 
 - `connectors/quickbooks/houston.json`: settings, Intuit OAuth and allowed API routes
 - `connectors/quickbooks/connector.luau`: operations and agent help

@@ -1,28 +1,30 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "name": "QuickBooks Online",
   "verification_key": "594d208fc48161aa6e504e56077299be37812b55abddad19a7c678d4c4b78087",
   "files": [
     "connector.luau"
   ],
   "icon": "icon.svg",
-  "config": {
-    "access": {
-      "default": "read-only",
+  "access": [
+    {
+      "name": "data",
       "label": "Access",
-      "options": [
+      "description": "Write also lets agents create, update, deactivate, delete and void records. Writes change your books immediately.",
+      "levels": [
         {
-          "label": "Read-only",
-          "value": "read-only"
+          "value": "read",
+          "label": "Read"
         },
         {
-          "label": "Read and write",
-          "value": "read-write"
+          "value": "write",
+          "label": "Write"
         }
       ],
-      "order": 1,
-      "type": "string"
-    },
+      "default": "read"
+    }
+  ],
+  "config": {
     "environment": {
       "default": "sandbox",
       "description": "Sandbox works with an Intuit app's Development keys and a sandbox company. Production needs the app's Production keys.",
@@ -37,7 +39,7 @@
           "value": "production"
         }
       ],
-      "order": 2,
+      "order": 1,
       "type": "string"
     },
     "company_id": {
@@ -45,20 +47,20 @@
       "label": "QuickBooks company ID (Realm ID)",
       "max_length": 32,
       "min_length": 1,
-      "order": 3,
+      "order": 2,
       "placeholder": "9341450000000000",
       "required": true,
       "type": "string"
     },
     "client_id": {
       "label": "Intuit app client ID",
-      "order": 4,
+      "order": 3,
       "required": true,
       "type": "string"
     },
     "client_secret": {
       "label": "Intuit app client secret",
-      "order": 5,
+      "order": 4,
       "required": true,
       "type": "secret"
     }
@@ -116,7 +118,7 @@
       }
     },
     {
-      "if": "{{ is config.access \"read-write\" }}",
+      "if": "{{ allows access.data \"write\" }}",
       "match": {
         "protocol": "http",
         "host": [

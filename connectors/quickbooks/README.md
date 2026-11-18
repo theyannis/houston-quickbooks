@@ -10,10 +10,10 @@ bills, payments, estimates, expenses, deposits and journal entries, see what cha
 recently, and run reports such as profit and loss, balance sheet, cash flow, trial
 balance, general ledger, and aged receivables and payables.
 
-With read and write access, agents can also create and update customers, vendors, items,
+With Write access, agents can also create and update customers, vendors, items,
 invoices, bills, payments, sales receipts, journal entries and other records, deactivate
 list entries, and delete or void transactions. Writes change your books immediately, so
-start with read-only access or a sandbox company until you trust a workflow. Agents never
+start with Read access or a sandbox company until you trust a workflow. Agents never
 email invoices or move money.
 
 Each connection reaches one QuickBooks company through your own Intuit developer app.

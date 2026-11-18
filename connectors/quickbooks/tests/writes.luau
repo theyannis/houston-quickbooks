@@ -1,5 +1,5 @@
 return {
-	scenario = {publisher = {}, config = {access = "read-write", environment = "production", company_id = "123145000000000", client_id = "fixture-client", client_secret = "fixture-secret"}, auth_method = "intuit", auth_config = {}},
+	scenario = {publisher = {}, access = {data = "write"}, config = {environment = "production", company_id = "123145000000000", client_id = "fixture-client", client_secret = "fixture-secret"}, auth_method = "intuit", auth_config = {}},
 	configure = function()
 		requests = {}
 		responses = {}
@@ -10,7 +10,7 @@ return {
 		end}
 	end,
 	run = function(qbo)
-		assert(qbo.createEntity ~= nil and qbo.updateEntity ~= nil and qbo.deleteEntity ~= nil and qbo.voidTransaction ~= nil, "read-write surface lacks writes")
+		assert(qbo.createEntity ~= nil and qbo.updateEntity ~= nil and qbo.deleteEntity ~= nil and qbo.voidTransaction ~= nil, "Write surface lacks writes")
 		local base = "https://quickbooks.api.intuit.com/v3/company/123145000000000/"
 
 		table.insert(responses, '{"Invoice":{"Id":"201","SyncToken":"0","TotalAmt":150},"time":"t"}')

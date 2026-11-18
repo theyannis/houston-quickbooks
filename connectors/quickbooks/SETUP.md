@@ -18,7 +18,7 @@ and admin access to the QuickBooks company you connect.
 2. In the Intuit portal, open your app's **Settings** (or **Keys and credentials**) for
    the environment you use, add the callback URL under **Redirect URIs**, and save.
 3. Back in Houston, choose:
-   - **Access**: **Read-only** to start, or **Read and write**.
+   - **Access**: **Read** to start, or **Write**.
    - **Environment**: **Sandbox** with the app's Development keys, or **Production** with
      its Production keys.
    - **QuickBooks company ID (Realm ID)**: the sandbox company ID, or your real company's ID.
